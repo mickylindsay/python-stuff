@@ -25,8 +25,10 @@ test = [
     "coverage[toml]==7.3.1",
 ]
 doc = [
+    "sphinx",
 ]
 build = [
+    "build[virtualenv]==1.0.3",
 ]
 dev = [
     "tox",
