@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "setuptools_scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-stuff"
+dynamic = ["version"]
+authors = [
+  { name="Micky Lindsay", email="mekelnz@gmail.com" },
+]
+description = "my python stuff"
+readme = "README.md"
+dependencies = [
+    # Add runtime dependencies here
+]
+
+[project.optional-dependencies]
+lint = [
+    "mypy", # Typechecker
+    "ruff", # Linter
+]
+test = [
+]
+doc = [
+]
+build = [
+]
+dev = [
+    "tox",
+    "python-stuff[lint]",
+    "python-stuff[test]",
+    "python-stuff[doc]",
+    "python-stuff[build]",
+]
+
+# Enables the usage of setuptools_scm
+[tool.setuptools_scm]
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+target-version = "py38"
+select = ["ALL"]
