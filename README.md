@@ -1,4 +1,4 @@
-Haven't written python in forever. Thought I would
+Haven't written python in forever. Thought I would see what python project setup looks like in 2024
 
 ## Setup
 - `python3 -m venv venv` - create virtual environment 
