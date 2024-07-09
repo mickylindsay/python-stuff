@@ -6,7 +6,7 @@ T = TypeVar("T")
 
 
 class LinkedList(Generic[T]):
-    """Singly linked list structure."""
+    """Singly-linked list structure."""
 
     def __init__(self, data: T, next_: Optional["LinkedList[T]"] = None) -> None:
         """Creates an empty LinkedList with None head."""
@@ -19,6 +19,47 @@ class LinkedList(Generic[T]):
         while cur.next_:
             cur = cur.next_
         cur.next_ = LinkedList(data)
+
+    def _traverse(self, num: int) -> "LinkedList[T]":
+        cur = self
+        i = num
+        while i > 0:
+            if cur.next_ is None:
+                msg = "index out of range"
+                raise IndexError(msg)
+            cur = cur.next_
+            i -= 1
+        return cur
+
+    def insert(self, index: int, data: T) -> None:
+        """Inserts new value into LinkedList at provided index."""
+        if index <= 0:
+            msg = "index must be greater than 0"
+            raise ValueError(msg)
+        cur = self._traverse(index - 1)
+        node = LinkedList(data)
+        node.next_ = cur.next_
+        cur.next_ = node
+
+    def remove(self, index: int) -> T:
+        """Removes new value from LinkedList at provided index and returns it."""
+        if index <= 0:
+            msg = "index must be greater than 0"
+            raise ValueError(msg)
+        cur = self._traverse(index - 1)
+        node = cur.next_
+        if node is None:
+            msg = "index out of range"
+            raise IndexError(msg)
+        cur.next_ = node.next_
+        return node.data
+
+    def get(self, index: int) -> T:
+        """Get data from list at provided index."""
+        if index < 0:
+            msg = "index must be greater than 0"
+            raise ValueError(msg)
+        return self._traverse(index).data
 
     def length(self) -> int:
         """Returns length of LinkedList."""
