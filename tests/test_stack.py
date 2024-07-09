@@ -1,5 +1,3 @@
-import pytest
-
 from python_stuff.stack import Stack
 
 
@@ -22,8 +20,7 @@ def test_stack() -> None:
 
 
 def test_stack_pop_empty() -> None:
-    with pytest.raises(IndexError, match="Stack is empty"):
-        Stack[str]().pop()
+    assert Stack[int]().pop() is None
 
 
 def test_stack_peek_empty() -> None:

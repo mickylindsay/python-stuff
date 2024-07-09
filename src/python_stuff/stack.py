@@ -18,11 +18,10 @@ class Stack(Generic[T]):
         """Pushes new data onto the Stack."""
         self.head = LinkedList(data, self.head)
 
-    def pop(self) -> T:
+    def pop(self) -> T | None:
         """Pops top of the Stack and returns the data."""
         if self.head is None:
-            msg = "Stack is empty"
-            raise IndexError(msg)
+            return None
         node = self.head
         self.head = self.head.next_
         return node.data
