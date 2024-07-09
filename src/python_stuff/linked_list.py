@@ -13,12 +13,13 @@ class LinkedList(Generic[T]):
         self.data = data
         self.next_ = next_
 
-    def add(self, data: T) -> None:
+    def add(self, data: T) -> "LinkedList[T]":
         """Appends new data to end of LinkedList."""
         cur = self
         while cur.next_:
             cur = cur.next_
         cur.next_ = LinkedList(data)
+        return cur.next_
 
     def _traverse(self, num: int) -> "LinkedList[T]":
         cur = self
@@ -31,7 +32,7 @@ class LinkedList(Generic[T]):
             i -= 1
         return cur
 
-    def insert(self, index: int, data: T) -> None:
+    def insert(self, index: int, data: T) -> "LinkedList[T]":
         """Inserts new value into LinkedList at provided index."""
         if index <= 0:
             msg = "index must be greater than 0"
@@ -40,6 +41,7 @@ class LinkedList(Generic[T]):
         node = LinkedList(data)
         node.next_ = cur.next_
         cur.next_ = node
+        return node
 
     def remove(self, index: int) -> T:
         """Removes new value from LinkedList at provided index and returns it."""
