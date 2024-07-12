@@ -1,6 +1,7 @@
 """Provides integer Binary Search Tree."""
 
 from __future__ import annotations
+from typing import Callable
 
 
 class BST:
@@ -35,3 +36,30 @@ class BST:
         if self.value > data and self.left:
             return self.left.search(data)
         return None
+
+    def delete(self, data: int) -> BST | None:
+        if self.value == data:
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+            # navigate to successor (furthest left child of right subtree)
+            node = self.right
+            prev = node
+            while node.left:
+                prev = node
+                node = node.left
+            prev.left = None
+            self.value = node.value
+        elif self.value < data and self.right:
+            self.right = self.right.delete(data)
+        elif self.value > data and self.left:
+            self.left = self.left.delete(data)
+        return self
+
+def traverse_in_order(bst: BST | None, fn: Callable[[BST], None]) -> None:
+    if bst is None:
+        return
+    traverse_in_order(bst.left, fn)
+    fn(bst)
+    traverse_in_order(bst.right, fn)
