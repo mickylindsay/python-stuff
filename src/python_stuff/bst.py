@@ -25,3 +25,13 @@ class BST:
             return self.left.insert(data)
         self.left = BST(data)
         return self.left
+
+    def search(self, data: int) -> BST | None:
+        """Search and return BST node with input value. None if not found."""
+        if self.value == data:
+            return self
+        if self.value < data and self.right:
+            return self.right.search(data)
+        if self.value > data and self.left:
+            return self.left.search(data)
+        return None
