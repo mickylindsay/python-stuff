@@ -1,5 +1,6 @@
 from python_stuff.bst import BST, traverse_in_order
 
+
 def test_bst() -> None:
     bst = BST(10)
     bst.insert(15)
@@ -41,12 +42,15 @@ def test_bst_delete() -> None:
     assert bst.right
     assert bst.right.value == 16
 
+
 def test_bst_in_order_traversal() -> None:
     bst = BST(10)
     for x in [15, 12, 7, 5, 4, 20, 17, 16]:
         bst.insert(x)
     collector = []
-    def fn(node : BST) -> None:
+
+    def fn(node: BST) -> None:
         collector.append(node.value)
+
     traverse_in_order(bst, fn)
     assert collector == [4, 5, 7, 10, 12, 15, 16, 17, 20]

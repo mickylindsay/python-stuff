@@ -1,7 +1,11 @@
 """Provides integer Binary Search Tree."""
 
 from __future__ import annotations
-from typing import Callable
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 
 class BST:
@@ -38,6 +42,7 @@ class BST:
         return None
 
     def delete(self, data: int) -> BST | None:
+        """Locates and deletes node. Returns new root of the tree."""
         if self.value == data:
             if self.left is None:
                 return self.right
@@ -57,7 +62,9 @@ class BST:
             self.left = self.left.delete(data)
         return self
 
+
 def traverse_in_order(bst: BST | None, fn: Callable[[BST], None]) -> None:
+    """Runs provided function across the tree in order."""
     if bst is None:
         return
     traverse_in_order(bst.left, fn)
